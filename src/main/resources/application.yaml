@@ -34,4 +34,3 @@ logging:
   level:
     org.springframework: ERROR
     com.maryanto.dimas.example: DEBUG
-  file: ${LOG_LOCATION_PATH:${spring.application.name}.log}
