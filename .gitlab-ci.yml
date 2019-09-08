@@ -10,7 +10,6 @@ cache:
 
 services:
   - name: repository.dimas-maryanto.com:8086/postgres:9.6
-    alias: postgres
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
@@ -18,7 +17,7 @@ variables:
   POSTGRES_DB: pg_test_data
   POSTGRES_USER: pg_test_user
   POSTGRES_PASSWORD: pg_test_passwd
-  DATABASE_HOST: postgres
+
 stages:
   - testing
   - build
