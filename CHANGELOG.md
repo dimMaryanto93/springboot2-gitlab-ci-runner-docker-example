@@ -1,3 +1,7 @@
+## `0.0.11-release`
+
+- Accessing postgres container to job, with hostname
+
 ## `0.0.3-release`
 
 - Enable caching maven docker
