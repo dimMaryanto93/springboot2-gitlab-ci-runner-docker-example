@@ -8,16 +8,15 @@ cache:
     - .m2/repository
 
 services:
-  - name: repository.dimas-maryanto.com:8086/postgres:9.6
-    alias: 'example-postgres-db'
-      
+  postgres: repository.dimas-maryanto.com:8086/postgres:9.6
+
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
   POSTGRES_DB: pg_test_data
   POSTGRES_USER: pg_test_user
   POSTGRES_PASSWORD: pg_test_passwd
-
+  DATABASE_HOST: postgres
 stages:
   - testing
   - build
