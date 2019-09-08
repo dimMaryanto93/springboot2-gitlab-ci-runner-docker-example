@@ -11,14 +11,26 @@ cache:
   paths:
     - .m2/repository
 
+stages:
+  - testing
+  - build
+  - deploy
+
 test:
-  stage: build
+  stage: testing
   before_script:
     - 'mvn versions:set -DnewVersion=$CI_COMMIT_TAG'
   script:
-    - 'mvn $MAVEN_CLI_OPTS clean package'
+    - 'mvn $MAVEN_CLI_OPTS clean test'
   tags:
     - docker
+  services:
+    - name: repository.dimas-maryanto.com:8086/postgres:9.6
+      alias: '$CI_PROJECT_PATH_SLUG-database'
+  variables:
+    - POSTGRES_DB: pg_test_data
+    - POSTGRES_USER: pg_test_user
+    - POSTGRES_PASSWORD: pg_test_passwd
   artifacts:
     paths:
       - target/*.jar
