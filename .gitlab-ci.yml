@@ -28,9 +28,9 @@ test:
     - name: repository.dimas-maryanto.com:8086/postgres:9.6
       alias: '$CI_PROJECT_PATH_SLUG-database'
   variables:
-    - POSTGRES_DB = pg_test_data
-    - POSTGRES_USER = pg_test_user
-    - POSTGRES_PASSWORD = pg_test_passwd
+    POSTGRES_DB: pg_test_data
+    POSTGRES_USER: pg_test_user
+    POSTGRES_PASSWORD: pg_test_passwd
   artifacts:
     paths:
       - target/*.jar
