@@ -17,8 +17,6 @@ variables:
   POSTGRES_DB: pg_test_data
   POSTGRES_USER: pg_test_user
   POSTGRES_PASSWORD: pg_test_passwd
-  DATABASE_HOST: example-postgres-db
-
 
 stages:
   - testing
