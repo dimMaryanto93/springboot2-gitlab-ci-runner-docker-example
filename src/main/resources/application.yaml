@@ -1,0 +1,37 @@
+server:
+  port: ${APPLICATION_PORT:8080}
+spring:
+  mvc:
+    dispatch-options-request: true
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${POSTGRES_DB:postgres}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:passwordnyaPostgres}
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        id:
+          new_generator_mappings: false
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
+        globally_quoted_identifiers: true
+        temp:
+          use_jdbc_metadata_defaults: false
+  flyway:
+    encoding: UTF-8
+    enabled: true
+    baseline-on-migrate: true
+    check-location: true
+    locations: classpath:/db/migration
+    clean-disabled: false
+    clean-on-validation-error: true
+    connect-retries: 2
+logging:
+  level:
+    org.springframework: ERROR
+    com.maryanto.dimas.example: DEBUG
+  file: ${LOG_LOCATION_PATH:${spring.application.name}.log}
