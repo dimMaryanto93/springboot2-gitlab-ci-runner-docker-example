@@ -18,13 +18,13 @@ stages:
 
 test:
   services:
-    - name: postgres:12.3
+    - name: repository.dimas-maryanto.com:8086/postgres:12.3
+      alias: postgres-db 
   variables:
     POSTGRES_DB: test_data
     POSTGRES_USER: test_user
     POSTGRES_PASSWORD: test_user
-    DATABASE_HOST: postgres
-    POSTGRES_HOST_AUTH_METHOD: trust
+    DATABASE_HOST: postgres-db
   stage: testing
   before_script:
     - 'mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_TAG'
