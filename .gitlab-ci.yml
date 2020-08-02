@@ -1,7 +1,3 @@
-# This template uses jdk8 for verifying and deploying images
-image:
-  name: repository.dimas-maryanto.com:8086/maven:3.6-jdk-8
-
 # Cache downloaded dependencies and plugins between builds.
 # To keep cache across branches add 'key: "$CI_JOB_NAME"'
 cache:
@@ -18,6 +14,8 @@ stages:
   - deploy
 
 test:
+  image:
+    name: repository.dimas-maryanto.com:8086/maven:3.6-jdk-8
   services:
     - name: repository.dimas-maryanto.com:8086/postgres:12.3
   variables:
@@ -37,6 +35,8 @@ test:
     - /-release$/
 
 packaging:
+  image:
+    name: repository.dimas-maryanto.com:8086/maven:3.6-jdk-8
   stage: build
   before_script:
     - 'mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_TAG'
