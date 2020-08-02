@@ -7,18 +7,10 @@ image:
 cache:
   paths:
     - .m2/repository
-
-services:
-  - name: repository.dimas-maryanto.com:8086/postgres:12.3
-    alias: postgresql
-
+    
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "--show-version -s .gitlab-ci_m2.xml"
-  POSTGRES_DB: test_data
-  POSTGRES_USER: test_user
-  POSTGRES_PASSWORD: test_user
-  DATABASE_HOST: postgresql
 
 stages:
   - testing
@@ -26,6 +18,14 @@ stages:
   - deploy
 
 test:
+  services:
+    - name: repository.dimas-maryanto.com:8086/postgres:12.3
+      alias: postgresql
+  variables:
+    - POSTGRES_DB: test_data
+    - POSTGRES_USER: test_user
+    - POSTGRES_PASSWORD: test_user
+    - DATABASE_HOST: postgresql
   stage: testing
   before_script:
     - 'mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_TAG'
@@ -41,7 +41,7 @@ packaging:
   before_script:
     - 'mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_TAG'
   script:
-    - 'mvn $MAVEN_CLI_OPTS clean package'
+    - 'mvn $MAVEN_CLI_OPTS clean package -DskipTests'
   artifacts:
     paths:
       - target/*.jar
