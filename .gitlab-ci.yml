@@ -9,7 +9,7 @@ cache:
     - .m2/repository
 
 services:
-  - name: repository.dimas-maryanto.com:8086/postgres:9.6
+  - name: repository.dimas-maryanto.com:8086/postgres:12.3
     alias: postgresql
 
 variables:
