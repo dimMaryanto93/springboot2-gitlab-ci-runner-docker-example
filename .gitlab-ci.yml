@@ -8,7 +8,6 @@ cache:
     - .m2/repository
     
 variables:
-  DOCKER_DRIVER: overlay2
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "--show-version -s .gitlab-ci_m2.xml"
 
@@ -19,13 +18,12 @@ stages:
 
 test:
   services:
-    - name: repository.dimas-maryanto.com:8086/postgres:12.3
-      alias: postgres_db
+    - name: postgres:12.3
   variables:
     POSTGRES_DB: test_data
     POSTGRES_USER: test_user
     POSTGRES_PASSWORD: test_user
-    DATABASE_HOST: postgres_db
+    DATABASE_HOST: postgres
     POSTGRES_HOST_AUTH_METHOD: trust
   stage: testing
   before_script:
