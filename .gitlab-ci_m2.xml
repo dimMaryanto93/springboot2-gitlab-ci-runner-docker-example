@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+    <mirrors>
+        <mirror>
+            <!--This sends everything else to /public -->
+            <id>repository.dimas-maryanto.com</id>
+            <mirrorOf>*</mirrorOf>
+            <url>http://192.168.88.50:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </mirror>
+    </mirrors>
+    <servers>
+        <server>
+            <id>repository.dimas-maryanto.com</id>
+            <username>developer</username>
+            <password>developer</password>
+        </server>
+    </servers>
+</settings>
