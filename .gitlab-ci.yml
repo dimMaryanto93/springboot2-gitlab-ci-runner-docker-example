@@ -14,7 +14,7 @@ services:
 
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
-  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  MAVEN_CLI_OPTS: "--show-version -s .gitlab-ci_m2.xml"
   POSTGRES_DB: test_data
   POSTGRES_USER: test_user
   POSTGRES_PASSWORD: test_user
@@ -28,9 +28,9 @@ stages:
 test:
   stage: testing
   before_script:
-    - 'mvn versions:set -DnewVersion=$CI_COMMIT_TAG'
+    - 'mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_TAG'
   script:
-    - 'mvn clean test'
+    - 'mvn $MAVEN_CLI_OPTS clean test'
   tags:
     - docker
   only:
@@ -39,7 +39,7 @@ test:
 packaging:
   stage: build
   before_script:
-    - 'mvn versions:set -DnewVersion=$CI_COMMIT_TAG'
+    - 'mvn $MAVEN_CLI_OPTS versions:set -DnewVersion=$CI_COMMIT_TAG'
   script:
     - 'mvn $MAVEN_CLI_OPTS clean package'
   artifacts:
