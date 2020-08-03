@@ -59,7 +59,11 @@ docker-publish:
   # Enabled to call docker command inside container from docker image maven:3.6-jdk-8
   services:
     - name: ${PRIVATE_REPOSITORY_PULL}docker:18.09-dind
-      command: ["dockerd-entrypoint.sh", "--insecure-registry=['repository.dimas-maryanto.com:8087', 'repository.dimas-maryanto.com:8086']"]
+      command: [
+        "dockerd-entrypoint.sh",
+        "--insecure-registry=repository.dimas-maryanto.com:8086",
+        "--insecure-registry=repository.dimas-maryanto.com:8087"
+      ]
       alias: dockerd
   variables:
     # modified file /etc/hosts inside docker container
