@@ -58,7 +58,7 @@ docker-publish:
   stage: publish
   # Enabled to call docker command inside container from docker image maven:3.6-jdk-8
   services:
-    - name: ${PRIVATE_REPOSITORY_PULL}docker:19.03.12
+    - name: ${PRIVATE_REPOSITORY_PULL}docker:19.03.12-dind
       alias: dockerd
   variables:
     # modified file /etc/hosts inside docker container
