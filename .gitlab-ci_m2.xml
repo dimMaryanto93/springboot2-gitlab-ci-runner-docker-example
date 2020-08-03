@@ -22,11 +22,13 @@
             <username>developer</username>
             <password>developer</password>
         </server>
+        <!-- authentication for insecure registry puller-->
         <server>
             <id>repository.dimas-maryanto.com:8086</id>
             <username>developer</username>
             <password>developer</password>
         </server>
+        <!-- authentication for insecure registry pusher-->
         <server>
             <id>repository.dimas-maryanto.com:8087</id>
             <username>developer</username>
