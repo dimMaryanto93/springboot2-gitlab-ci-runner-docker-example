@@ -1,13 +1,11 @@
 version: '3.7'
 services:
   postgres:
-    image: repository.dimas-maryanto.com:8086/postgres:9.6
+    image: ${PRIVATE_REGISTRY}postgres:12.3
     environment:
-      - POSTGRES_PASSWORD=passwordnyaPostgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
-    ports:
-      - 5432:5432
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
