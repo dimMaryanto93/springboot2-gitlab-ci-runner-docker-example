@@ -8,7 +8,4 @@ EXPOSE 8080
 ARG JAR_FILE
 ADD target/${JAR_FILE} /usr/share/applications/application.jar
 
-ARG PROPERTIES_YML
-ADD ${PROPERTIES_YML} /usr/share/applications/application.yml
-
 VOLUME /usr/share/applications/

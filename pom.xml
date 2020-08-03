@@ -96,7 +96,6 @@
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
-                        <PROPERTIES_YML>src/main/resources/application.yml</PROPERTIES_YML>
                     </buildArgs>
                 </configuration>
             </plugin>
