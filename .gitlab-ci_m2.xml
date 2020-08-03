@@ -22,5 +22,15 @@
             <username>developer</username>
             <password>developer</password>
         </server>
+        <server>
+            <id>repository.dimas-maryanto.com:8086</id>
+            <username>developer</username>
+            <password>developer</password>
+        </server>
+        <server>
+            <id>repository.dimas-maryanto.com:8087</id>
+            <username>developer</username>
+            <password>developer</password>
+        </server>
     </servers>
 </settings>

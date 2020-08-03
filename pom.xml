@@ -19,6 +19,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <finalName>${project.artifactId}-${project.version}</finalName>
+        <docker-registry.group>example/spring-boot</docker-registry.group>
+        <docker-registry.host.push>repository.dimas-maryanto.com:8087</docker-registry.host.push>
+        <docker-registry.host.pull>repository.dimas-maryanto.com:8086</docker-registry.host.pull>
     </properties>
 
     <dependencies>
@@ -81,6 +84,20 @@
                 <configuration>
                     <target>8</target>
                     <source>8</source>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.13</version>
+                <configuration>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <repository>${docker-registry.host.push}/${docker-registry.group}/${project.artifactId}</repository>
+                    <tag>${project.version}</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                        <PROPERTIES_YML>src/main/resources/application.yml</PROPERTIES_YML>
+                    </buildArgs>
                 </configuration>
             </plugin>
         </plugins>
