@@ -45,25 +45,29 @@ check_interval = 0
   session_timeout = 1800
 
 [[runners]]
-  name = "gitlab-runner-docker"
-  url = "http://host-gitlab"
-  token = "token-gitlab-ci"
+  name = "gitlab-runner-docker-executor"
+  environment = ["DOCKER_TLS_CERTDIR="]
+  log_level = "debug"
+  url = "http://example.gitlab.com"
+  token = "gitlab-runner-token-from-gitlab"
   executor = "docker"
-  ### add 'build_dir' for primary build directory like this###
-  build_dir = "/builds"
+  ### Add spesific build directory
+  build_dir = "/builds"  
   [runners.custom_build_dir]
+  [runners.cache]
+    [runners.cache.s3]
+    [runners.cache.gcs]
   [runners.docker]
     tls_verify = false
-    image = "maven:3.6-jdk-8"
+    image = "default.docker.image:v1.0.0"
+    ### Add /etc/hosts to docker container
+    extra_hosts = ["your.domain.name:XX.XX.XX.XX"]
     privileged = false
     disable_entrypoint_overwrite = false
     oom_kill_disable = false
     disable_cache = false
     volumes = ["/cache"]
     shm_size = 0
-  [runners.cache]
-    [runners.cache.s3]
-    [runners.cache.gcs]
   [runners.machine]
     IdleCount = 0
     MachineDriver = ""
