@@ -63,8 +63,7 @@ docker-publish:
       # Enabled insecure registry into docker inside docker
       entrypoint: ["dockerd-entrypoint.sh"]
       command: [
-        "--insecure-registry", ${PRIVATE_REPOSITORY_PULL},
-        "--insecure-registry", ${PRIVATE_REPOSITORY_PUSH}
+        "--insecure-registry", "${PRIVATE_REPOSITORY_PULL}", "--insecure-registry", "${PRIVATE_REPOSITORY_PUSH}"
       ]
       alias: dockerd
   variables:
