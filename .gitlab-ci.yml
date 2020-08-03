@@ -62,8 +62,10 @@ docker-publish:
     - name: ${PRIVATE_REPOSITORY_PULL}/docker:18.09-dind
       # Enabled insecure registry into docker inside docker
       entrypoint: ["dockerd-entrypoint.sh"]
+      # TODO variable `--insecure-registry` cant be inject as variable
       command: [
-        "--insecure-registry", "${PRIVATE_REPOSITORY_PULL}", "--insecure-registry", "${PRIVATE_REPOSITORY_PUSH}"
+        "--insecure-registry=repository.dimas-maryanto.com:8087",
+        "--insecure-registry=repository.dimas-maryanto.com:8086"
       ]
       alias: dockerd
   variables:
