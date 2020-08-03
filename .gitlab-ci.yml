@@ -6,7 +6,8 @@ cache:
 variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   MAVEN_CLI_OPTS: "--show-version -s .gitlab-ci_m2.xml"
-  PRIVATE_REPOSITORY_PULL: repository.dimas-maryanto.com:8086/
+  PRIVATE_REPOSITORY_PULL: repository.dimas-maryanto.com:8086
+  PRIVATE_REPOSITORY_PUSH: repository.dimas-maryanto.com:8087
 
 stages:
   - test
@@ -16,13 +17,13 @@ stages:
 
 # base image for build java using docker image maven
 image:
-  name: ${PRIVATE_REPOSITORY_PULL}maven:3.6-jdk-8
+  name: ${PRIVATE_REPOSITORY_PULL}/maven:3.6-jdk-8
 
 test:
   stage: test
   # Add service PostgreSQL
   services:
-    - name: ${PRIVATE_REPOSITORY_PULL}postgres:12.3
+    - name: ${PRIVATE_REPOSITORY_PULL}/postgres:12.3
       alias: postgres-db
   variables:
     POSTGRES_DB: test_data
@@ -58,12 +59,12 @@ docker-publish:
   stage: publish
   # Enabled to call docker command inside container from docker image maven:3.6-jdk-8
   services:
-    - name: ${PRIVATE_REPOSITORY_PULL}docker:18.09-dind
+    - name: ${PRIVATE_REPOSITORY_PULL}/docker:18.09-dind
       # Enabled insecure registry into docker inside docker
+      entrypoint: ["dockerd-entrypoint.sh"]
       command: [
-        "dockerd-entrypoint.sh",
-        "--insecure-registry=repository.dimas-maryanto.com:8086",
-        "--insecure-registry=repository.dimas-maryanto.com:8087"
+        "--insecure-registry", ${PRIVATE_REPOSITORY_PULL},
+        "--insecure-registry", ${PRIVATE_REPOSITORY_PUSH}
       ]
       alias: dockerd
   variables:
