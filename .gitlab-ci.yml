@@ -59,8 +59,12 @@ docker-publish:
   # Enabled to call docker command inside container from docker image maven:3.6-jdk-8
   services:
     - name: ${PRIVATE_REPOSITORY_PULL}docker:19.03.12-dind
+      alias: dockerd
   variables:
-    DOCKER_TLS_CERTDIR: ""
+    # modified file /etc/hosts inside docker container
+    DOCKER_HOST: tcp://dockerd:2375
+    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_DRIVER: overlay2
   environment:
     name: development
   before_script:
