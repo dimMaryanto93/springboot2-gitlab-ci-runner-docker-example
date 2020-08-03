@@ -18,6 +18,22 @@ stages:
 image:
   name: ${PRIVATE_REPOSITORY_PULL}maven:3.6-jdk-8
 
+test-docker:
+  stage: test
+  image: ${PRIVATE_REPOSITORY_PULL}docker:18.09
+  services:
+    - name: ${PRIVATE_REPOSITORY_PULL}docker:18.09-dind
+      alias: dockerd-1
+  variables:
+    DOCKER_HOST: tcp://dockerd-1:2375/
+    DOCKER_DRIVER: overlay2
+  script:
+    - docker info
+  tags:
+    - docker
+  only:
+    - /-release$/
+
 test:
   stage: test
   # Add service PostgreSQL
