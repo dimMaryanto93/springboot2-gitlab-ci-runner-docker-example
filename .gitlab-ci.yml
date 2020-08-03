@@ -78,7 +78,7 @@ docker-publish:
       alias: dockerd
   variables:
     # modified file /etc/hosts inside docker container
-    DOCKER_HOST: tcp://dockerd:2375/
+    DOCKER_HOST: tcp://dockerd:2375
     DOCKER_DRIVER: overlay2
   environment:
     name: development
