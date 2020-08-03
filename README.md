@@ -1,6 +1,3 @@
-[![pipeline status](http://repository.dimas-maryanto.com/examples/gitlab-ci-cd/springboot2-gitlab-runner-docker/badges/master/pipeline.svg)](http://repository.dimas-maryanto.com/examples/gitlab-ci-cd/springboot2-gitlab-runner-docker/commits/master) 
-[![coverage report](http://repository.dimas-maryanto.com/examples/gitlab-ci-cd/springboot2-gitlab-runner-docker/badges/master/coverage.svg)](http://repository.dimas-maryanto.com/examples/gitlab-ci-cd/springboot2-gitlab-runner-docker/commits/master)
-
 ## Gitlab Runner with docker
 
 Install `gitlab-runner` same as host with `docker`.
